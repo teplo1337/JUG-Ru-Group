@@ -27,8 +27,8 @@ export class FilterComponent implements OnInit, OnDestroy {
       .pipe(
         debounceTime(1000)
       )
-      .subscribe(genresInput => {
-        console.log(genresInput);
+      .subscribe(text => {
+        const genresInput = text.toLocaleLowerCase();
         this.filterDataEmitter.emit({ genresInput });
       });
   }
