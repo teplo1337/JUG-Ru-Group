@@ -1,0 +1,9 @@
+.checkboxes {
+    display: inline-block;
+    width: 80%;
+}
+
+.search {
+    display: inline-block;
+    width: 20%;
+}

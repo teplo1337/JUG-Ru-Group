@@ -1,0 +1,36 @@
+<form #form>
+
+    <div class="checkboxes">
+
+
+            <ng-container *ngFor="let item of items">
+                <input 
+                type="checkbox" 
+                [attr.id]="item" 
+                [checked]="checked"
+                (change)="checkboxChangeHandler(item)"
+                >
+
+                <label [attr.for]="item">{{item}}</label>
+            </ng-container>
+    </div>
+
+    <div class="search">
+        <input type="text" placeholder="Поиск" (input)="searchChangeHandler($event.target.value)">
+        <button (click)="resetClickHandler(form)">Сбросить фильтр</button>
+    </div>
+
+</form>
+
+<!-- <form [formGroup]="form" >
+  <div *ngFor="let gengre of gengres.controls; let i=index">
+    <input 
+        type="checkbox" 
+        [attr.id]="i" 
+        [formControl]="gengre"
+        (change)="checkboxChangeHandler(gengre, i)"
+        />
+        <label [attr.for]="i">{{items[i]}}</label>
+  </div>
+  <button type="submit">Submit</button>
+ </form> -->

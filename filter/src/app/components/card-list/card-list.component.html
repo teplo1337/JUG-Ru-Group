@@ -1,0 +1,19 @@
+
+<app-filter
+[items]="cardListViewModel.genres | async"
+(filterDataEmitter)="cardListViewModel.applyFilter($event)"
+(resetFilterEmitter)="cardListViewModel.resetFilter()"
+></app-filter>
+
+<section *ngIf="(cardListViewModel.currentSeries | async) as currentSeries; else loading;">
+    <ng-container *ngFor="let series of currentSeries">
+        <app-card [series]="series"></app-card>
+    </ng-container>
+    <ng-container *ngIf="!currentSeries.length">
+        Извините ничего не найдено
+    </ng-container>
+</section>
+
+<ng-template #loading>
+    Загрузка
+</ng-template>
