@@ -14,7 +14,7 @@ export class CardListViewModel {
   }
 
   get genres(): Observable<string[]> {
-    return this.serialsObs.pipe(map(sms => sms.reduce((a, s) => {
+    return this.serialsObs.pipe(map(serials => serials.reduce((a, s) => {
       s.genres.forEach(g => a.add(g));
       return a;
     }, new Set([]))))
@@ -49,8 +49,8 @@ export class CardListViewModel {
       map(serials => serials
         .filter(s => {
           const isCurrentGenre = this.selectedGenres.length === 0 ||
-            s.genres
-              .some(g => this.selectedGenres.includes(g));
+            this.selectedGenres
+              .every(g => s.genres.includes(g));
 
           const isCurrentTitle = !this.selectedGenresInput ||
             s.title
