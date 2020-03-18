@@ -47,12 +47,20 @@ export class CardListViewModel {
 
     this.serialsObs.pipe(
       map(serials => serials
-        .filter(s =>
-          s.genres
-            .some(g => this.selectedGenres.length === 0 || this.selectedGenres.includes(g)) &&
-          s.genres
-            .some(g => !this.selectedGenresInput || g.indexOf(this.selectedGenresInput) !== -1)
-        )
+        .filter(s => {
+          const isCurrentGenre = this.selectedGenres.length === 0 ||
+            s.genres
+              .some(g => this.selectedGenres.includes(g));
+
+          const isCurrentTitle = !this.selectedGenresInput ||
+            s.title
+              .toLocaleLowerCase()
+              .indexOf(this.selectedGenresInput) !== -1 ||
+            s.genres
+              .some(g => g.indexOf(this.selectedGenresInput) !== -1);
+
+          return isCurrentGenre && isCurrentTitle;
+        })
       )
     )
     .pipe(first())
